@@ -17,7 +17,7 @@ install_requires = [
 
 setup(
     name='sentry-pubuim',
-    version='0.0.3',
+    version='0.0.4',
     author='minbaby.zhang',
     author_email='minbaby.zhang@behinders.com',
     url='https://github.com/minbaby/sentry-pubuim',
