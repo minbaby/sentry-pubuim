@@ -23,6 +23,8 @@ LEVEL_TO_COLOR = {
     'fatal': 'primary',
 }
 
+DEFAULT_IMG = 'https://raw.githubusercontent.com/minbaby/sentry-pubuim/master/idxdmy.jpeg'
+
 
 log = logging.getLogger('test1')
 
@@ -49,7 +51,7 @@ class PubuimOptionsForm(notify.NotificationConfigurationForm):
         label='Icon URL',
         help_text='The url of the icon to appear beside your bot (32px png), '
                   'leave empty for none.<br />You may use '
-                  'http://myovchev.github.io/sentry-slack/images/logo32.png',
+                  'https://raw.githubusercontent.com/minbaby/sentry-pubuim/master/idxdmy.jpeg',
         widget=forms.URLInput(attrs={'class': 'span8'}),
         required=False
     )
@@ -105,14 +107,9 @@ class PubuimPlugin(notify.NotificationPlugin):
             }
         }
 
-
-        if icon_url:
-            payload['displayUser']['avatarUrl'] = icon_url
+        payload['displayUser']['avatarUrl'] = icon_url if icon_url else DEFAULT_IMG
 
         values = json.dumps(payload)
-
-        log.info(values)
-        # raise Exception(values)
 
         # Apparently we've stored some bad data from before we used `URLField`.
         webhook = webhook.strip(' ')
