@@ -4,6 +4,7 @@ sentry_pubuim.plugin
 
 :license: BSD, see LICENSE for more details.
 """
+from sentry.utils.strings import strip
 import sentry_pubuim
 import logging
 
@@ -93,11 +94,15 @@ class PubuimPlugin(notify.NotificationPlugin):
         title = group.message_short.encode('utf-8')
         project_name = get_project_full_name(project).encode('utf-8')
 
+        # event.get
+        description = "[TAG:]\t" + ",".join(["(%s=%s)" % (key, value) for key, value in event.get_tags()]) + \
+                      "\n\n[MESSAGE:]\n" + strip(event.message)
+
         payload = {
             "text": '[%s] %s' % (project_name, title),
             "attachments": [{
                 "title": title,
-                "description": title,
+                "description": description,
                 "url": group.get_absolute_url(),
                 "color": self.color_for_group(group)
             }],
