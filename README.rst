@@ -1,4 +1,4 @@
-sentry-slack
+sentry-pubuim
 ============
 
 An extension for `Sentry <https://getsentry.com>`_ which posts notifications to a `Pubu.im <https://pubu.im>`_ channel.
